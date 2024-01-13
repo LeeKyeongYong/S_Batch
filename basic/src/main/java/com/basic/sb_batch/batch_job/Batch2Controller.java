@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/batch")
+//@RequestMapping("/batch")
 @RequiredArgsConstructor
 public class Batch2Controller {
 
-    private final Batch2Service batchService;
-    @GetMapping("/simple")
+  //  private final Batch2Service batchService;
+    @GetMapping("/hello")
     @ResponseBody
-    public String runSimpleJob(){
-        batchService.runSimpleJob();
-        return "runSimpleJob Ok";
+    public String runHelloJob(){
+    //    batchService.runHelloJob();
+        return "HelloSimpleJob Ok";
     }
 }
