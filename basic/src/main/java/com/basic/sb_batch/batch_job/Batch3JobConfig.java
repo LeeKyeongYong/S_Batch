@@ -38,7 +38,7 @@ public class Batch3JobConfig {
                 .build();
     }
 
-    @Bean
+   @Bean
     public Tasklet batch3Step1Tasklet(){
         return ((contribution, chunkContext) -> {
             System.out.println("Hello World 2/1");

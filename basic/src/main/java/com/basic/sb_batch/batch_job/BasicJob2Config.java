@@ -37,8 +37,8 @@ public class BasicJob2Config {
 
     //실행순서 3)
     @Bean
-    public Job helloJob(JobRepository jobRepository, Step helloStep1) {
-        return new JobBuilder("helloJob", jobRepository)
+    public Job aelloJob(JobRepository jobRepository, Step helloStep1) {
+        return new JobBuilder("aelloJob", jobRepository)
                 .start(helloStep1)
                 .build();
     }

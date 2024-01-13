@@ -24,7 +24,7 @@ public class SecondBasiJobConfig {
     .incrementer(new RunIdincrementer()) 사용
      */
     //실행순서 3)
-    @Bean
+   @Bean
     public Job helloJob(JobRepository jobRepository, Step simpleStep1) {
         return new JobBuilder("helloJob", jobRepository)
                 .start(simpleStep1)
@@ -33,8 +33,7 @@ public class SecondBasiJobConfig {
     }
 
     //실행순서 2)
-
-    @Bean
+   @Bean
     public Step helloStep1(JobRepository jobRepository, Tasklet helloStep1Tasklet1, PlatformTransactionManager platformTransactionManager) {
         return new StepBuilder("helloStep1Tasklet1", jobRepository)
                 .tasklet(helloStep1Tasklet1, platformTransactionManager)

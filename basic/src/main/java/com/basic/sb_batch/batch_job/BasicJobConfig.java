@@ -22,6 +22,16 @@ public class BasicJobConfig {
         배치안에 여러개의 잡들이 있음
         하나의 잡에서는 다중의 스탭을 구성할수도 잇음.
         여래개의 1단위로 나누는 테스클릿과 청크방식이 존재.
+        일반모드할경우 직접 batch하는 경우가있어서 DB생성해야함.. => Batch기록
+        메모리 모드일경우 Batch테이블 만들지 않음.
+      batch:
+        jdbc:
+          initialize-schema: always
+          셋팅하면 h2테이블에 자동 생성이됨...
+
+     잡은 같은 매개변수 구성으로 2번이상 실행되지 않는다.
+     helloJob.run()을 하면 batch_job_execution 테이블에 이력이 생성이됨
+
      */
 
     //실행순서 3)
@@ -34,7 +44,7 @@ public class BasicJobConfig {
 
     //실행순서 2)
 
-    @Bean
+   @Bean
     public Step helloStep1(JobRepository jobRepository, Tasklet helloStep1Tasklet1, PlatformTransactionManager platformTransactionManager) {
         return new StepBuilder("helloStep1Tasklet1", jobRepository)
                 .tasklet(helloStep1Tasklet1, platformTransactionManager)

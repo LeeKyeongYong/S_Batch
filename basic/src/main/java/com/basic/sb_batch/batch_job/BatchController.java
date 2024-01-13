@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class BatchController {
 
-    private final BatchService batchService;
-    @GetMapping("/simple")
-    @ResponseBody
+   private final BatchService batchService;
+   @GetMapping("/simple")
+   @ResponseBody
     public String runSimpleJob(){
         batchService.runSimpleJob();
         return "runSimpleJob Ok";
