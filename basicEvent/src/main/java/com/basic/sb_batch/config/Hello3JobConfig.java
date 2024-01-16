@@ -34,7 +34,10 @@ public class Hello3JobConfig {
                 .build();
                 */
     @Bean
-    public Job hello3Job(JobRepository jobRepository,Step hello3Step1, Step hello3Step2,Step hello3Step3){
+    public Job hello3Job( JobRepository jobRepository,
+                          Step hello3Step1,
+                          Step hello3Step2,
+                          Step hello3Step3){
 
         Flow flow1 = new FlowBuilder<SimpleFlow>("flow1")
                 .start(hello3Step1)
@@ -54,6 +57,7 @@ public class Hello3JobConfig {
                 .next(hello3Step3)
                 .end()
                 .incrementer(new RunIdIncrementer());
+
         return jobBuilder.build();
     }
     //@JobScope
