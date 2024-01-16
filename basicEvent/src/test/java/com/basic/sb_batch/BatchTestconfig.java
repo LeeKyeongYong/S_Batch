@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class BatchTestconfig {
     @Bean
-    @Primary
     public JobLauncherTestUtils helloJobLauncherTestUtils(Job helloJob){
         JobLauncherTestUtils utils = new JobLauncherTestUtils();
         utils.setJob(helloJob);
@@ -19,7 +18,6 @@ public class BatchTestconfig {
     }
 
     @Bean
-    @Primary
     public JobLauncherTestUtils helloJobLauncherTestUtils2(Job batch3Job){
         JobLauncherTestUtils utils = new JobLauncherTestUtils();
         utils.setJob(batch3Job);
@@ -27,7 +25,6 @@ public class BatchTestconfig {
     }
 
     @Bean
-    @Primary
     public JobLauncherTestUtils helloJobLauncherTestUtils3(Job hello3Job) {
         JobLauncherTestUtils utils = new JobLauncherTestUtils();
         utils.setJob(hello3Job);
