@@ -1,5 +1,6 @@
 package com.basic.sb_batch.config;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -35,6 +36,15 @@ public class Hello4JobConfig {
                 .incrementer(new RunIdIncrementer())
                 .build();
     }
+
+    @JobScope
+    @Component
+    public static class Hello4Step1Counter{
+        private int count=0;
+        public void printCount(String where){
+            System.out.println(" count = "+ ++count+" in "+where);
+        }
+    }
     
     @JobScope
     @Bean
@@ -55,10 +65,15 @@ public class Hello4JobConfig {
     //원본데이터 읽기
     @StepScope
     @Component
+    @RequiredArgsConstructor
     public  static class Hello4Step1Reader implements ItemReader<Integer>{
+
+        private final Hello4Step1Counter hello4Step1Counter;
         @Override
         public Integer read() {
-            int no =(int)(Math.random()*500);
+            //int no =(int)(Math.random()*500);
+            hello4Step1Counter.printCount("Reader");
+            int no =(int)(Math.random()*200);
             if(no==100) return null;
             return no;
         }
@@ -68,10 +83,13 @@ public class Hello4JobConfig {
     //Ex : 50 -> "no. 50"
     @StepScope
     @Component
+    @RequiredArgsConstructor
     public static class Hello4Step1Processor implements ItemProcessor<Integer,String>{
+
+        private final Hello4Step1Counter hello4Step1Counter;
         @Override
         public String process(Integer item) {
-
+            hello4Step1Counter.printCount("Processor");
             return "no. "+item;
         }
     }
@@ -79,12 +97,16 @@ public class Hello4JobConfig {
     //파생 데이터를 화면에 출력
     @StepScope
     @Component
+    @RequiredArgsConstructor
     public static class Hello4StepWriter implements ItemWriter<String>{
+
+        private final Hello4Step1Counter hello4Step1Counter;
         @Override
         public void write(Chunk<? extends String> chunk) {
             List<String> items = (List<String>) chunk.getItems();
             for(String item: items){
                 System.out.println("item = "+item);
+                hello4Step1Counter.printCount("writer, item="+item);
             }
         }
     }
