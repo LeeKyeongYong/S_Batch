@@ -24,6 +24,9 @@ public class BatchTest {
     @Autowired
     private JobLauncherTestUtils helloJobLauncherTestUtils3;
 
+    @Autowired
+    private JobLauncherTestUtils helloJobLauncherTestUtils4;
+
     @DisplayName("첫번째 배치")
     @Test
     public void 첫번째배치테스트() throws Exception{
@@ -40,5 +43,11 @@ public class BatchTest {
     @Test
     public void 세번째배치테스트() throws Exception{
         helloJobLauncherTestUtils3.launchJob();
+    }
+
+    @DisplayName("네번째 배치")
+    @Test
+    public void 네번째배치테스트() throws Exception{
+        helloJobLauncherTestUtils4.launchJob();
     }
 }
