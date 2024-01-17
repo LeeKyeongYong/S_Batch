@@ -13,12 +13,12 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public void create(String name){
+    public Product create(String name){
         Product product = Product
                 .builder()
                 .name(name)
                 .build();
 
-        productRepository.save(product);
+        return productRepository.save(product);
     }
 }
