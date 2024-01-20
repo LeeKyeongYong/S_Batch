@@ -104,10 +104,14 @@ public class MakeProductLogJobConfig {
     @Bean
     public ItemWriter<ProductLog> step1Writer(){
         return items -> items.forEach(item ->{
-            if(item.getProduct().getId()==100){
-                throw new RuntimeException("100번은 실패");
-            }
-            productLogRepository.save(item);
+
+           // if(item.getProduct().getId()==100){
+           //     throw new RuntimeException("100번은 실패");
+           // }
+           // productLogRepository.save(item);
+
+            if(!productLogRepository.existsByProduct(item.getProduct()))
+                productLogRepository.save(item);
         });
     }
 
