@@ -27,7 +27,7 @@ public class Hello5JobConfig {
     @JobScope
     @Bean
     public Step hello5Step1(JobRepository jobRepository, PlatformTransactionManager platformTransactionManager){
-        return new StepBuilder("hello5Step1Tasklet",jobRepository)
+        return new StepBuilder("hello5Step1",jobRepository)
                 .<Integer,String>chunk(10,platformTransactionManager)
                 .reader(()->{
                     Integer no = (int)(Math.random()*100);
